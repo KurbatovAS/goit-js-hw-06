@@ -1,3 +1,5 @@
+'use strict';
+
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215).toString(16)}`;
 }
@@ -7,6 +9,9 @@ const refs = {
   dataCreateEl: document.querySelector('[data-create]'),
   dataDestroyEl: document.querySelector('[data-destroy]'),
   divBoxesEl: document.querySelector('#boxes'),
+};
+
+const variables = {
   amount: 0,
   size: 30,
   arrayForMarkup: [],
@@ -18,25 +23,29 @@ refs.dataCreateEl.addEventListener('click', createBoxes);
 refs.dataDestroyEl.addEventListener('click', destroyBoxes)
 
 function getInputValue(event) {
-  refs.amount = event.currentTarget.value;
+  if (event.currentTarget.value > 96) {
+    alert('Максимально допустимое число - 96');
+  }
+    variables.amount = event.currentTarget.value;
 };
 
 function createBoxes() {
-   for (let i = 0; i < refs.amount; i += 1) {
+   for (let i = 0; i < variables.amount; i += 1) {
     const color = getRandomHexColor();
-    refs.arrayForMarkup.push(`<div style="background-color: ${color}; width: ${refs.size}px; height: ${refs.size}px"></div>`);
-    refs.size += 10;
+    variables.arrayForMarkup.push(`<div style="background-color: ${color}; width: ${variables.size}px; height: ${variables.size}px"></div>`);
+    variables.size += 10;
   };
 
-  refs.markup = refs.arrayForMarkup.join('');
-  refs.divBoxesEl.insertAdjacentHTML('beforeend', refs.markup);  
+  variables.markup = variables.arrayForMarkup.join('');
+  refs.divBoxesEl.innerHTML = variables.markup;
+
+  refs.inputEl.value = '';
+  variables.amount = 0;
+  variables.size = 30;
+  variables.arrayForMarkup = [];
+  variables.markup = '';
 };
 
 function destroyBoxes() {
-  refs.inputEl.value = 0;
   refs.divBoxesEl.innerHTML = '';
-  refs.amount = 0;
-  refs.size = 30;
-  refs.arrayForMarkup = [];
-  refs.markup = '';
   };

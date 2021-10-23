@@ -1,5 +1,6 @@
+'use strict';
+
 const formEl = document.querySelector('form');
-// console.log(formEl);
 
 formEl.addEventListener('submit', onFormSubmit);
 
@@ -15,13 +16,11 @@ function onFormSubmit (event) {
         password,
     };
 
-    if (email && password) { console.log(formData); formEl.reset()}
-    else {alert('Пожалуйста, заполните все поля!')}
-    
-    // const formData = new FormData(event.currentTarget);
-
-    // formData.forEach((value, name) => {
-    //     console.log('onFormSubmit -> name: ', name);
-    //     console.log('onFormSubmit -> value: ', value);
-    // })
-} 
+    if (email && password) {
+        console.log(formData);
+        formEl.reset()
+    }
+    else {
+        alert('Пожалуйста, заполните все поля!')
+    }    
+};

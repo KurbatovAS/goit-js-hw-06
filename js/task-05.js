@@ -1,10 +1,19 @@
+'use strict';
+
 const refs = {
     inputEl: document.querySelector('#name-input'),
-    nameInSpanEl: document.querySelector('#name-output'),
+    spanEl: document.querySelector('#name-output'),    
 };
 
 const changeName = (event) => {
-    refs.nameInSpanEl.textContent = event.currentTarget.value;
+    let inputCurrentValue = event.currentTarget.value;
+
+    if (inputCurrentValue === '') {
+        refs.spanEl.innerHTML = 'Anonymous';
+    }
+    else {
+        refs.spanEl.textContent = inputCurrentValue;
+    } 
 };
 
 refs.inputEl.addEventListener('input', changeName);
